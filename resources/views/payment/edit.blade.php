@@ -12,7 +12,7 @@
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Table</a></li>
-                                    <li class="breadcrumb-item active">addMember</li>
+                                    <li class="breadcrumb-item active">UpdateMember</li>
                                 </ol>
                             </div>
                         </div>
@@ -25,7 +25,7 @@
                                 <div class="col-sm-4">
                                     <a href="{{route('asd.index')}}" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> List of Members</a>
                                 </div>
-                                <h4 class="header-title">Add New Members</h4>
+                                <h4 class="header-title">Update Members Info</h4>
                                 @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -38,9 +38,9 @@
                                 
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="floating-preview">
-                                        <form action="{{ route('asd.store') }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('asd.update', $member->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            @method('POST')
+                                            @method('patch')
 
                                         <div class="row mt-4">
                                             <div class="col-lg-6">
@@ -48,42 +48,23 @@
                                                     @error('FullName')
                                             <div class="invalid-tooltip">{{$message}}</div>
                                             @enderror
-                                                    <input type="text" class="form-control" id="floatingInput" placeholder="John Duo" required name="FullName" value="{{ old('FullName')}}">
+                                                    <input type="text" class="form-control" id="floatingInput" placeholder="John Duo" required name="FullName" value="{{ $member->name }}">
                                                     <label for="floatingInput">{{__('Full Name')}}:</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="EmailAddress" value="{{ old('EmailAddress')}}">
+                                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="EmailAddress" value="{{ $member->email }}">
                                                     <label for="floatingInput">Email address</label>
                                                 </div>
                                             
-                                                {{-- <h5 class="mb-3 mt-4">
-                                                    Office
-                                                </h5>
-                                                <div class="row g-2">
-                                                    <div class="col-md">
-                                                        <div class="form-floating mb-3">
-                                                            <input type="tel" class="form-control" id="floatingInput" placeholder="+88-018-000-000" name="userPhoneNumber" value="{{ old('userPhoneNumber')}}">
-                                                            <label for="floatingInput">{{__('Phone')}}</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md">
-                                                        <div class="form-floating mb-3">
-                                                            <input type="tel" class="form-control" id="floatingInput" placeholder="+88-018-000-000" name="userPhoneNumber" value="{{ old('userPhoneNumber')}}">
-                                                            <label for="floatingInput">{{__('Phone')}}</label>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                
-                                                </div> --}}
                                             </div>
                                         
                                             <div class="col-lg-6">
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="floatingInput" placeholder="+88-018-000-000" name="PhoneNumber" value="{{ old('PhoneNumber')}}">
+                                                    <input type="text" class="form-control" id="floatingInput" placeholder="+88-018-000-000" name="PhoneNumber" value="{{ $member->phone }}">
                                                     <label for="floatingInput">{{__('Phone')}}</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="date" class="form-control" id="floatingInput" name="date" value="{{ old('date')}}">
+                                                    <input type="date" class="form-control" id="floatingInput" name="date" value="{{ $member->date }}">
                                                     <label for="floatingInput">{{__('Date')}}</label>
                                                 </div>
                                             </div>
@@ -94,7 +75,7 @@
 
                                                 <button class="btn btn-warning text-center justify-content-center" type="reset">{{__('Reset')}} </button>
                                                 
-                                                <button class="btn btn-primary text-center justify-content-center" type="submit">{{__('Create')}} </button>
+                                                <button class="btn btn-primary text-center justify-content-center" type="submit">{{__('Update')}} </button>
                                             </div>
                                         </div>
                                         </form>

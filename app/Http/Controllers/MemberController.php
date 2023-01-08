@@ -6,6 +6,7 @@ use App\Models\Member;
 use Exception;
 use Illuminate\Http\Request;
 
+
 class MemberController extends Controller
 {
     /**
@@ -26,8 +27,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $add=Member::all();
-        return view('member.create', compact('add'));
+       
+        return view('member.create');
     }
 
     /**
@@ -46,11 +47,11 @@ class MemberController extends Controller
             $m->date = $request->date;
 
             $m->save();
-            return redirect(route('asd.index'))->with($this->resMessageHtml(true, false, 'Member created successfully'));
+            return redirect(route('asd.index'));
             }
             catch (Exception $error) {
-            dd($error);
-            return redirect()->back()->with($this->resMessage(false, 'error', 'Server error'));
+            //dd($error);
+            return redirect()->back()->withInput();
             }
     }
 
@@ -71,9 +72,11 @@ class MemberController extends Controller
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function edit(Member $member)
+    public function edit($id)
     {
-        //
+
+        $member=Member::findOrFail($id);
+        return view('member.edit', compact('member'));
     }
 
     /**
@@ -83,9 +86,22 @@ class MemberController extends Controller
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Member $member)
+    public function update(Request $request, $id)
     {
-        //
+        try{
+            $m=Member::find($id);
+            $m->name = $request->FullName;
+            $m->phone = $request->PhoneNumber;
+            $m->email = $request->EmailAddress;
+            $m->date = $request->date;
+
+            $m->save();
+            return redirect(route('asd.index'));
+            }
+            catch (Exception $error) {
+            //dd($error);
+            return redirect()->back()->withInput();
+            }
     }
 
     /**
@@ -94,8 +110,9 @@ class MemberController extends Controller
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $member)
+    public function destroy($id)
     {
-        //
+        Member::find($id)->delete();
+        return redirect()->back();
     }
 }
