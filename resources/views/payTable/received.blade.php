@@ -12,7 +12,7 @@
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Table</a></li>
-                                    <li class="breadcrumb-item active">addMember</li>
+                                    <li class="breadcrumb-item active">Payment</li>
                                 </ol>
                             </div>
                         </div>
@@ -23,9 +23,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-sm-4">
-                                    <a href="{{route('asd.index')}}" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> List of Members</a>
+                                    <a href="{{route('asd.index')}}" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> List of Reveived</a>
                                 </div>
-                                <h4 class="header-title">Add New Members</h4>
+                                <h4 class="header-title">Make Payment</h4>
                                 @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -45,31 +45,52 @@
                                         <div class="row mt-4">
                                             <div class="col-lg-6">
                                                 <div class="form-floating mb-3">
-                                                    @error('FullName')
-                                            <div class="invalid-tooltip">{{$message}}</div>
-                                            @enderror
-                                                    <input type="text" class="form-control" id="floatingInput" placeholder="John Duo" required name="FullName" value="{{ old('FullName')}}">
-                                                    <label for="floatingInput">{{__('Full Name')}}:</label>
+                                                    <select class="form-control select2" data-toggle="select2" name="member">
+                                                        <option value="">{{__('Select Name')}}</option>
+                                                        @forelse($payer as $p)
+                                                        <option value="{{$p->id}}">{{$p->name}}</option>
+                
+                                                        @empty
+                                                            <option value="">{{('No data found!')}}</option>
+                                                        @endforelse
+                                                    </select>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="EmailAddress" value="{{ old('EmailAddress')}}">
-                                                    <label for="floatingInput">Email address</label>
+                                                    <select class="form-control" name="monthName" id="">
+                                                        <option value="">Select Month</option>
+                                                        <option value="January">January </option>
+                                                        <option value="February">February </option>
+                                                        <option value="March">March</option>
+                                                        <option value="April">April</option>
+                                                        <option value="May">May</option>
+                                                        <option value="June">June</option>
+                                                        <option value="July">July</option>
+                                                        <option value="August">August</option>
+                                                        <option value="September">September</option>
+                                                        <option value="October">October</option>
+                                                        <option value="November">November</option>
+                                                        <option value="December">December</option>
+                                                        
+                                                    </select>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="floatingInput" name="reg" value="{{ old('reg')}}">
-                                                    <label for="floatingInput">Registration Fee</label>
+                                                    <input type="number" class="form-control" id="floatingInput" name="payAmount" value="{{ old('payAmount')}}">
+                                                    <label for="floatingInput">{{__('Amount')}}</label>
                                                 </div>
-                                            
                                             </div>
                                         
                                             <div class="col-lg-6">
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="floatingInput" placeholder="+88-018-000-000" name="PhoneNumber" value="{{ old('PhoneNumber')}}">
-                                                    <label for="floatingInput">{{__('Phone')}}</label>
+                                                    <select class="form-control" name="category" id="">
+                                                        <option value="">Select Payment Category</option>
+                                                        <option value="1">Registration Fee</option>
+                                                        <option value="2">Monthly Fee</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="floatingInput" name="monthly" value="{{ old('monthly')}}">
-                                                    <label for="floatingInput">Monthly Payable</label>
+                                                    <select class="form-control" id="year" name="year">
+                                                        <option value="">Select Year</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-floating mb-3">
                                                     <input type="date" class="form-control" id="floatingInput" name="date" value="{{ old('date')}}">
@@ -98,4 +119,21 @@
     </div> 
 </div>
 
+<script>
+    (function () {
+        var ddlYears = document.getElementById("year");
+
+        var currentYear = (new Date()).getFullYear();
+
+        for (var i = 2018; i <= currentYear; i++) {
+            var option = document.createElement("OPTION");
+            option.innerHTML = i;
+            option.value = i;
+            ddlYears.appendChild(option);
+            }
+        })();
+            </script>
+
 @endsection
+
+

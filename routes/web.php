@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ReceiveController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,5 @@ Route::get('/',[DashboardController::class,'dashboard']);
 
 
 Route::resource('asd', MemberController::class);
-
-
+Route::resource('payment', ReceiveController::class);
 // });

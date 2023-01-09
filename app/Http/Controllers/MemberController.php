@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 
 
+
 class MemberController extends Controller
 {
     /**
@@ -41,9 +42,12 @@ class MemberController extends Controller
     {
         try{
             $m= new Member();
+            $m->memberId = 'M-'.$m->id.RAND(1000,99999);
             $m->name = $request->FullName;
             $m->phone = $request->PhoneNumber;
             $m->email = $request->EmailAddress;
+            $m->regFee = $request->reg;
+            $m->monthlyPayable = $request->monthly;
             $m->date = $request->date;
 
             $m->save();

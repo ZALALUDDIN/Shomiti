@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('receives', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('memberId')->uniqid();
-            $table->string('name')->unique();
-            $table->string('phone');
-            $table->string('email');
-            $table->string('regFee');
-            $table->string('monthlyPayable');
-            $table->date('date');
+            $table->string('MemberName');
+            $table->string('paymentName');
+            $table->string('month');
+            $table->string('year');
+            $table->string('amount');
+            $table->date('paymentDate');
             $table->integer('status')->default(1);
             $table->integer('created_by')->nullable();
 			$table->integer('updated_by')->nullable();
@@ -37,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('receives');
     }
 };

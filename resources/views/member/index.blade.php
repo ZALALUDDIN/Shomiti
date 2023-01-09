@@ -50,9 +50,12 @@
                                               </div>
                                           </th>
                                           <th>#SL.</th>
+                                          <th>Member Id</th>
                                           <th>Name</th>
                                           <th>Phone</th>
                                           <th>Email</th>
+                                          <th>Registraton Fee</th>
+                                          <th>Monthly Payable</th>
                                           <th>Register Date</th>
                                           <th>Status</th>
                                           <th style="width: 75px;">Action</th>
@@ -68,9 +71,12 @@
                                               </div>
                                           </td>
                                           <td>{{ ++$loop->index}}</td>
+                                          <td>{{$m->memberId}}</td>
                                           <td>{{$m->name}}</td>
                                           <td>{{$m->phone}}</td>
                                           <td>{{$m->email}}</td>
+                                          <td>{{$m->regFee}}</td>
+                                          <td>{{$m->monthlyPayable}}</td>
                                           <td>{{$m->date}}</td>
                                           <td>
                                               @if ($m->status === 1)
