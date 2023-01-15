@@ -50,7 +50,8 @@
                                               </div>
                                           </th>
                                           <th>#SL.</th>
-                                          <th>Payments</th>
+                                          <th>Member Id</th>
+                                          <th>Member Name</th>
                                           <th>Amounts</th>
                                           <th>Payment Date</th>
                                           <th>Status</th>
@@ -67,6 +68,7 @@
                                               </div>
                                           </td>
                                           <td>{{ ++$loop->index}}</td>
+                                          <td>{{$m->memberId}}</td>
                                           <td>{{$m->paymentName}}</td>
                                           <td>{{$m->amount}}</td>
                                           <td>{{$m->paymentDate}}</td>

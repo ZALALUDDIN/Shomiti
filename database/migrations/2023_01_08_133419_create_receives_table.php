@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('receives', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('MemberName');
+            $table->unsignedBigInteger('member_id')->nullable();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->string('paymentName');
             $table->string('month');
             $table->string('year');

@@ -42,7 +42,7 @@ class MemberController extends Controller
     {
         try{
             $m= new Member();
-            $m->memberId = 'M-'.$m->id.RAND(1000,99999);
+            $m->memberId = 'M-'.$m->id.RAND(Date("Ymd"),Date("His"));
             $m->name = $request->FullName;
             $m->phone = $request->PhoneNumber;
             $m->email = $request->EmailAddress;

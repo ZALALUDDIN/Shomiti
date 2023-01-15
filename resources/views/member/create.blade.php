@@ -56,7 +56,7 @@
                                                     <label for="floatingInput">Email address</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="floatingInput" name="reg" value="{{ old('reg')}}">
+                                                    <input type="number" class="form-control" id="floatingInput" name="reg" value="{{ old('reg')}}">
                                                     <label for="floatingInput">Registration Fee</label>
                                                 </div>
                                             
@@ -68,7 +68,7 @@
                                                     <label for="floatingInput">{{__('Phone')}}</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="floatingInput" name="monthly" value="{{ old('monthly')}}">
+                                                    <input type="number" class="form-control" id="floatingInput" name="monthly" value="{{ old('monthly')}}">
                                                     <label for="floatingInput">Monthly Payable</label>
                                                 </div>
                                                 <div class="form-floating mb-3">

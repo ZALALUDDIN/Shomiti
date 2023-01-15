@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
 use App\Models\Receive;
 use Exception;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class ReceiveController extends Controller
      */
     public function create()
     {
-        $payer=Receive::all();
+        $payer=Member::all();
         return view('payTable.received', compact('payer'));
     }
 
