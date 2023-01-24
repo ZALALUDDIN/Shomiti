@@ -19,11 +19,6 @@
                     </div>
                 </div>
 
-
-                @php
-                    $d=Date("YmdHis");
-                    echo RAND(Date("Ymd"),Date("His"));
-                @endphp
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -64,29 +59,12 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="form-floating mb-3">
-                                                    <div class="form-group">
-                                                        <label for="year">Year</label> <br>
-                                                            <select class="form-control" name="year" id="year">
-                                                                <option value="">Select Year</option>
-                                                            </select>
-                                                    </div>
-                                                </div> --}}
-                                                <div class="form-floating mb-3">
-                                                  <div class="form-group">
-                                                    <label for="receipt_no">Receipt No</label>
-                                                        <input type="number" class="form-control" name="receipt_no" id="receipt_no">
-                                                  </div>
-                                                </div>
                                             </div>
                                         <div class="col-lg-6">
                                             <div class="form-floating mb-3">
                                                 <div class="form-group">
-                                                    <label for="is_once">Include One Time Payment (Subscription)</label> <br>
-                                                      <select name="is_once" onchange="get_fees()" id="is_once" class="form-control">
-                                                        <option value="0">No</option>
-                                                        <option value="1">Yes</option>
-                                                      </select>
+                                                    <label for="receipt_no">Receipt No</label>
+                                                        <input type="number" class="form-control" name="receipt_no" id="receipt_no">
                                                 </div>
                                             </div>
                                             {{-- <div class="form-floating mb-3">
@@ -112,16 +90,28 @@
                                                <tbody>
                                                    <tr>
                                                        <td colspan="2">
-                                                           {{-- <select class="form-control inv_cat_id dont-select-me" onchange="get_test(this)" id="year">
-                                                            <option value="0"> -- Select Year -- </option>
-                                                           </select> --}}
+                                                        <select class="form-control" name="year" id="year">>
+                                                            <option value="">{{__('-------Select-----')}}</option>
+                                                            @forelse($year as $y)
+                                                            <option value="{{$y->id}}">{{$y->year}}</option>
+                    
+                                                            @empty
+                                                                <option value="">{{('No year found!')}}</option>
+                                                            @endforelse
+                                                        </select>
                                                            
 
                                                        </td>
                                                        <td colspan="2">
-                                                           <select class="form-control month" id="month" name="inv_list_id[]" onChange="get_price(this)";>
-                                                                   <option value="0"> -- Month Name -- </option>
-                                                           </select>
+                                                        <select class="form-control" name="month" id="member_id">>
+                                                            <option value="">{{__('-------Select-----')}}</option>
+                                                            @forelse($month as $m)
+                                                            <option value="{{$m->id}}">{{$m->month}}</option>
+                    
+                                                            @empty
+                                                                <option value="">{{('No month found!')}}</option>
+                                                            @endforelse
+                                                        </select>
                                                        </td>
                                                        <td>
                                                            <input type="text" name="price[]" required readonly class="form-control price" placeholder="Price" value="0.00">
@@ -217,37 +207,7 @@
 
 <script>
     (function () {
-        var ddlYears = document.getElementById("year");
-
-        var currentYear = (new Date()).getFullYear();
-
-        for (var i = 2018; i <= currentYear; i++) {
-            var option = document.createElement("OPTION");
-            option.innerHTML = i;
-            option.value = i;
-            ddlYears.appendChild(option);
-            }
-        
-
-
-            let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-            var month_selected = (new Date).getMonth(); // current month
-            var option = '';
-            option = '<option>Select Month</option>'; // first option
-
-            for (let i = 0; i < months.length; i++) {
-                let month_number = (i + 1);
-
-                let month = (month_number <= 9) ? '0' + month_number : month_number;
-
-                let selected = (i === month_selected ? ' selected' : '');
-                option += '<option value="' + month + '"' + selected + '>' + months[i] + '</option>';
-            }
-            document.getElementById("month").innerHTML = option;
-
-
-
+       
         		//   STARTS OF DYNAMIC FORM
 		//#------------------------------------
 		//add row

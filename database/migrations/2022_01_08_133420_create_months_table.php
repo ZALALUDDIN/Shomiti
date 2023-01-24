@@ -27,73 +27,73 @@ return new class extends Migration
         DB::table('months')->insert([
             [
                 'id' => '1',
-                'year' => 'January',
+                'month' => 'January',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '2',
-                'year' => 'February',
+                'month' => 'February',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '3',
-                'year' => 'March',
+                'month' => 'March',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '4',
-                'year' => 'April',
+                'month' => 'April',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '5',
-                'year' => 'May',
+                'month' => 'May',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '6',
-                'year' => 'June',
+                'month' => 'June',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '7',
-                'year' => 'July',
+                'month' => 'July',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '8',
-                'year' => 'August',
+                'month' => 'August',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '9',
-                'year' => 'September',
+                'month' => 'September',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '10',
-                'year' => 'October',
+                'month' => 'October',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '11',
-                'year' => 'November',
+                'month' => 'November',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'id' => '12',
-                'year' => 'December',
+                'month' => 'December',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

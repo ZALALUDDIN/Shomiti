@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use App\Models\Receive;
+use App\Models\Year;
+use App\Models\Month;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -28,7 +30,9 @@ class ReceiveController extends Controller
     public function create()
     {
         $payer=Member::all();
-        return view('payTable.received', compact('payer'));
+        $year=Year::all();
+        $month=Month::all();
+        return view('payTable.received', compact('payer', 'year', 'month'));
     }
 
     /**

@@ -15,4 +15,12 @@ class Receive extends Model
     {
         return $this->belongsTo(Member::class);
     }
+    public function get_month()
+    {
+        return $this->belongsTo(Month::class);
+    }
+    public function get_year()
+    {
+        return $this->belongsTo(Year::class);
+    }
 }
