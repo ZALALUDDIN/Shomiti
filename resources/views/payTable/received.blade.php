@@ -48,7 +48,7 @@
                                                 <div class="form-floating mb-3">
                                                     <div class="form-group">
                                                         <label for="">Member Name</label>
-                                                        <select class="form-control" name="member" onchange="get_fees()" id="member_id">>
+                                                        <select class="form-control" name="member" onchange="get_price(this)" id="member_id">>
                                                             <option value="">{{__('-------Select-----')}}</option>
                                                             @forelse($payer as $p)
                                                             <option value="{{$p->id}}">{{$p->name}}</option>
@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="panel-body">
 
-                                            <table id="invoice" class="table table-striped">
+                                            <table id="payment" class="table table-striped text-white">
                                                <thead>
                                                    <tr class="bg-primary">
                                                        <th colspan="2">Payment Year</th>
@@ -90,7 +90,7 @@
                                                <tbody>
                                                    <tr>
                                                        <td colspan="2">
-                                                        <select class="form-control" name="year" id="year">>
+                                                        <select class="form-control" name="year" onchange="get_month(this)" id="year">
                                                             <option value="">{{__('-------Select-----')}}</option>
                                                             @forelse($year as $y)
                                                             <option value="{{$y->id}}">{{$y->year}}</option>
@@ -103,18 +103,20 @@
 
                                                        </td>
                                                        <td colspan="2">
-                                                        <select class="form-control" name="month" id="member_id">>
-                                                            <option value="">{{__('-------Select-----')}}</option>
+                                                        <select class="form-control" name="month" id="member_id">
+                                                            <option value=""></option>
+
+                                                            {{-- <option value="">{{__('-------Select-----')}}</option>
                                                             @forelse($month as $m)
                                                             <option value="{{$m->id}}">{{$m->month}}</option>
                     
                                                             @empty
                                                                 <option value="">{{('No month found!')}}</option>
-                                                            @endforelse
+                                                            @endforelse --}}
                                                         </select>
                                                        </td>
                                                        <td>
-                                                           <input type="text" name="price[]" required readonly class="form-control price" placeholder="Price" value="0.00">
+                                                           <input type="text" name="price[]" required class="form-control" value="0.00">
                                                        </td>
 
                                                        <td>
@@ -133,44 +135,15 @@
                                                        <td></td>
                                                    </tr>
                                                    <tr>
-                                                       <th colspan="3" class="text-right">Vat</th>
-                                                       <td>
-                                                           <div class="input-group">
-                                                             <div class="input-group-addon">%</div>
-                                                             <input type="text" id="vatParcent" required   class="form-control"name="vat" value="0" onKeyup="vat_discount()">
-                                                           </div>
-                                                       </td>
-                                                       <td><input type="text" id="vat" required class="vatDiscount paidDue form-control" placeholder="Vat" value="0.00" ></td>
-                                                       <td></td>
-                                                   </tr>
-                                                   <tr>
-                                                       <th colspan="3" class="text-right">Discount</th>
-                                                       <td>
-                                                           <div class="input-group">
-                                                             <div class="input-group-addon">%</div>
-                                                             <input type="text"name="discount"  id="discountParcent" required class=" form-control" value="0" onKeyup="vat_discount()" >
-                                                           </div>
-                                                       </td>
-
-                                                       <td><input type="text" required id="discount" class="vatDiscount paidDue form-control" placeholder="Discount"  value="0.00" ></td>
-                                                       <td></td>
-                                                   </tr>
-                                                   <tr class="bg-success">
                                                        <td colspan="3"></td>
-                                                       <th class="text-right">Grand Total</th>
-                                                       <th><input type="text" name="grand_total" readonly required  id="grand_total" class="paidDue form-control" placeholder="Grand Total" value="0.00" onKeyup="vat_discount()" ></th>
-                                                       <td></td>
-                                                   </tr>
-                                                   <tr>
-                                                       <td colspan="3"></td>
-                                                       <th class="text-right">Paid</th>
+                                                       <th class="text-right text-success">Pay</th>
                                                        <td><input type="text" name="paid" id="paid" class="paidDue form-control" required placeholder="Paid"  value="0.00" onKeyup="get_due()"></td>
                                                        <td></td>
                                                    </tr>
                                                    <tr class="bg-danger">
                                                        <td colspan="3"></td>
                                                        <th class="text-right">Due</th>
-                                                       <td><input type="text" name="due" id="due" class="paidDue form-control" required placeholder="Due" value="0.00"></td>
+                                                       <td><input type="text" name="due" id="due" class="paidDue form-control" required readonly placeholder="Due" value="0.00"></td>
                                                        <td></td>
                                                    </tr>
 
@@ -211,12 +184,12 @@
         		//   STARTS OF DYNAMIC FORM
 		//#------------------------------------
 		//add row
-		var body      = $('#invoice > tbody');
+		var body      = $('#payment > tbody');
 		$('body').on('click','.addBtn' ,function() {
 
-			$('#invoice > tbody >tr:last').clone().insertAfter('#invoice > tbody >tr:last');
-			$("#invoice > tbody >tr:last input[type='text']").val('');
-			$("#invoice > tbody >tr:last .month").html('');
+			$('#payment > tbody >tr:last').clone().insertAfter('#payment > tbody >tr:last');
+			$("#payment > tbody >tr:last input[type='text']").val('');
+			$("#payment > tbody >tr:last .month").html('');
 			//$('.select2').select2();
 
 
@@ -235,18 +208,18 @@
 
 	})();
 
-function get_test(v){
+function get_month(v){
 	$(v).parent('td').siblings('td').find('select').html('');
 	$.ajax({
-		url:'',
+		url:'{{ route("payment.get_month")}}',
 		type: 'GET',
 		data: {'id': $(v).val()},
 
 		success: function(data){
 			if(data){
-				$(v).parent('td').siblings('td').find('select').append("<option value=''> -- Investigation Name -- </option>");
+				$(v).parent('td').siblings('td').find('select').append("<option value=''> -- Select Month -- </option>");
 				for(var i in data)
-				$(v).parent('td').siblings('td').find('select').append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+				$(v).parent('td').siblings('td').find('select').append("<option value='"+data[i].id+"'>"+data[i].month+"</option>");
 			}
 		}
 	});
@@ -254,44 +227,30 @@ function get_test(v){
 function get_price(v){
 	$(v).parent('td').siblings('td').find('.price').html('');
 	$.ajax({
-		url:'',
+		url:'{{ route("payment.get_price")}}',
 		type: 'GET',
 		data: {'id': $(v).val()},
 		success: function(data){
 			if(data){
-				$(v).parent('td').siblings('td').find('.price').val(data.price);
+				$(v).parent('td').siblings('td').find('.price').val(data.monthlyPayable);
 				var total = 0;
 				$('.price').each(function(){
 					total += parseFloat($(this).val());
 					$('#total').val(total.toFixed(2));
-					$('#grand_total').val(total.toFixed(2));
 				});
 			}
 		}
 	});
 }
-	function vat_discount(){
-		var total = $('#total').val();
-		var vatParcent = $('#vatParcent').val();
-		$('#vat').val(parseFloat((total * vatParcent)/100).toFixed(2));
-		//vat in discount
-		var discountParcent = $('#discountParcent').val();
-		$('#discount').val(parseFloat((total * discountParcent)/100).toFixed(2));
-		//grand total
-		var vat = $('#vat').val();
-		var discount = $('#discount').val();
-		$('#grand_total').val(((parseFloat(total)+parseFloat(vat)-parseFloat(discount))).toFixed(2));
-	}
 
 	function get_due(){
-		var grand_total =$('#grand_total').val();
+		var total =$('#total').val();
 		var paid =$('#paid').val();
-		var due = ((parseFloat(grand_total)-parseFloat(paid))).toFixed(2);
+		var due = ((parseFloat(total)-parseFloat(paid))).toFixed(2);
 		if (due < 1)
 			due = 0;
 		$('#due').val(due).toFixed(2);
 	}
-
 
             </script>
 

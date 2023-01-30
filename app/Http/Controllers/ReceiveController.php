@@ -103,6 +103,20 @@ class ReceiveController extends Controller
      */
     public function destroy(Receive $receive)
     {
-        //
+        $receive->delete();
+        return redirect()->back();
     }
+
+
+
+    public function get_month(Request $request)
+    {
+        $get_month = Month::find($request->id)->get();
+        return $get_month;
+    }
+
+    public function get_payable(Request $request){
+		$get_payable = Member::find($request->id);
+		return $get_payable;
+	}
 }
