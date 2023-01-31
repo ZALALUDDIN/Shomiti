@@ -90,7 +90,7 @@
                                                <tbody>
                                                    <tr>
                                                        <td colspan="2">
-                                                        <select class="form-control" name="year" onchange="get_month(this)" id="year">
+                                                        <select class="form-control" name="year" onChange="get_month(this)" id="year">
                                                             <option value="">{{__('-------Select-----')}}</option>
                                                             @forelse($year as $y)
                                                             <option value="{{$y->id}}">{{$y->year}}</option>
@@ -103,20 +103,12 @@
 
                                                        </td>
                                                        <td colspan="2">
-                                                        <select class="form-control" name="month" id="member_id">
+                                                        <select class="form-control" name="month" onChange="get_price(this)" id="member_id">
                                                             <option value=""></option>
-
-                                                            {{-- <option value="">{{__('-------Select-----')}}</option>
-                                                            @forelse($month as $m)
-                                                            <option value="{{$m->id}}">{{$m->month}}</option>
-                    
-                                                            @empty
-                                                                <option value="">{{('No month found!')}}</option>
-                                                            @endforelse --}}
                                                         </select>
                                                        </td>
                                                        <td>
-                                                           <input type="text" name="price[]" required class="form-control" value="0.00">
+                                                           <input type="text" name="price[]" required readonly class="form-control" value="0.00">
                                                        </td>
 
                                                        <td>

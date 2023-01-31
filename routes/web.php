@@ -24,6 +24,6 @@ Route::get('/',[DashboardController::class,'dashboard']);
 Route::resource('asd', MemberController::class);
 
 Route::get('/pay/get_month',[ReceiveController::class,'get_month'])->name('payment.get_month');
-Route::get('/pay/get_price',[ReceiveController::class,'get_price'])->name('payment.get_price');
+Route::get('/pay/get_price',[ReceiveController::class,'get_payable'])->name('payment.get_price');
 Route::resource('payment', ReceiveController::class);
 

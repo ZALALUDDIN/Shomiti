@@ -47,8 +47,8 @@ class ReceiveController extends Controller
             $m= new Receive();
             $m->memberName = $request->member;
             $m->paymentName = $request->category;
-            $m->month = $request->monthName;
             $m->year = $request->year;
+            $m->month = $request->monthName;
             $m->amount = $request->payAmount;
             $m->paymentDate = $request->date;
 
@@ -116,7 +116,7 @@ class ReceiveController extends Controller
     }
 
     public function get_payable(Request $request){
-		$get_payable = Member::find($request->id);
+		$get_payable = Member::find($request->id)->get();
 		return $get_payable;
 	}
 }
