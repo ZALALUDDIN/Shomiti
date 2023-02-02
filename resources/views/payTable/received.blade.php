@@ -39,7 +39,7 @@
                                 
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="floating-preview">
-                                        <form action="{{ route('asd.store') }}" method="POST" enctype="multipart/form-data">
+                                        <form id="paymentReceiveForm" action="{{ route('asd.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('POST')
 
@@ -51,7 +51,7 @@
                                                         <select class="form-control" name="member" onchange="get_price(this)" id="member_id">>
                                                             <option value="">{{__('-------Select-----')}}</option>
                                                             @forelse($payer as $p)
-                                                            <option value="{{$p->id}}">{{$p->name}}</option>
+                                                            <option payable_amount="{{$p->monthlyPayable}}" value="{{$p->id}}">{{$p->name}}</option>
                     
                                                             @empty
                                                                 <option value="">{{('No data found!')}}</option>
@@ -103,12 +103,12 @@
 
                                                        </td>
                                                        <td colspan="2">
-                                                        <select class="form-control" name="month" onChange="get_price(this)" id="member_id">
+                                                        <select class="form-control" name="month" onchange="get_total()";>
                                                             <option value=""></option>
                                                         </select>
                                                        </td>
                                                        <td>
-                                                           <input type="text" name="price[]" required readonly class="form-control" value="0.00">
+                                                           <input type="text" name="price[]" required readonly  class="form-control price" value="0.00">
                                                        </td>
 
                                                        <td>
@@ -123,7 +123,7 @@
                                                    <tr class="bg-info">
                                                        <td colspan="3"></td>
                                                        <th class="text-right">Total</th>
-                                                       <th><input type="text" name="total" id="total" class="form-control" readonly required placeholder="Total"  value="0.00"></th>
+                                                       <th><input type="text" name="total" id="total" class="form-control" readonly required value="0.00"></th>
                                                        <td></td>
                                                    </tr>
                                                    <tr>
@@ -171,9 +171,9 @@
     </div> 
 
 <script>
-    (function () {
-       
-        		//   STARTS OF DYNAMIC FORM
+    
+    $(document).ready(function() {
+        //   STARTS OF DYNAMIC FORM
 		//#------------------------------------
 		//add row
 		var body      = $('#payment > tbody');
@@ -183,24 +183,27 @@
 			$("#payment > tbody >tr:last input[type='text']").val('');
 			$("#payment > tbody >tr:last .month").html('');
 			//$('.select2').select2();
-
-
 		});
-
+        
+        $(document).on("change","#paymentReceiveForm select[name='month']",function(){
+            var payableAmount = $("#paymentReceiveForm select[name='member'] option:selected").attr('payable_amount');
+           $("#paymentReceiveForm input[name='price[]']").val(payableAmount)
+        })
 		//remove row
 		$('body').on('click','.removeBtn' ,function() {
         $(this).parent().parent().parent().remove();
-		var total = 0;
-			$('.price').each(function(){
+        });
+	});
+
+  const get_total = () => {
+    var total = 0;
+			    $('.price').each(function(){
 				total += parseFloat($(this).val());
 				$('#total').val(total.toFixed(2));
 			});
-		});
+  }
 
-
-	})();
-
-function get_month(v){
+    function get_month(v){
 	$(v).parent('td').siblings('td').find('select').html('');
 	$.ajax({
 		url:'{{ route("payment.get_month")}}',
@@ -212,28 +215,12 @@ function get_month(v){
 				$(v).parent('td').siblings('td').find('select').append("<option value=''> -- Select Month -- </option>");
 				for(var i in data)
 				$(v).parent('td').siblings('td').find('select').append("<option value='"+data[i].id+"'>"+data[i].month+"</option>");
+                
 			}
 		}
 	});
 }
-function get_price(v){
-	$(v).parent('td').siblings('td').find('.price').html('');
-	$.ajax({
-		url:'{{ route("payment.get_price")}}',
-		type: 'GET',
-		data: {'id': $(v).val()},
-		success: function(data){
-			if(data){
-				$(v).parent('td').siblings('td').find('.price').val(data.monthlyPayable);
-				var total = 0;
-				$('.price').each(function(){
-					total += parseFloat($(this).val());
-					$('#total').val(total.toFixed(2));
-				});
-			}
-		}
-	});
-}
+
 
 	function get_due(){
 		var total =$('#total').val();

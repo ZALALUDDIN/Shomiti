@@ -18,10 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('member_id')->nullable();
             $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->string('paymentName');
-            $table->string('month');
             $table->string('year');
+            $table->string('month');
             $table->string('amount');
-            $table->date('paymentDate');
+            $table->date('paymentDate')-> Carbon::now();
             $table->integer('status')->default(1);
             $table->integer('created_by')->nullable();
 			$table->integer('updated_by')->nullable();
