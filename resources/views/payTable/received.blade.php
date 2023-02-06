@@ -39,7 +39,7 @@
                                 
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="floating-preview">
-                                        <form id="paymentReceiveForm" action="{{ route('asd.store') }}" method="POST" enctype="multipart/form-data">
+                                        <form id="paymentReceiveForm" action="{{ route('payment.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('POST')
 

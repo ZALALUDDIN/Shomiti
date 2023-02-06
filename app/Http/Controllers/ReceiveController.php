@@ -19,7 +19,10 @@ class ReceiveController extends Controller
     public function index()
     {
         $pay=Receive::all();
-        return view('payTable.receivedList', compact('pay'));
+        $member=Member::all();
+        $year=Year::all();
+        $month=Month::all();
+        return view('payTable.receivedList', compact('pay','member', 'year', 'month'));
     }
 
     /**
@@ -31,8 +34,8 @@ class ReceiveController extends Controller
     {
         $payer=Member::all();
         $year=Year::all();
-        $month=Month::all();
-        return view('payTable.received', compact('payer', 'year', 'month'));
+        //$month=Month::all();
+        return view('payTable.received', compact('payer', 'year'));
     }
 
     /**
@@ -44,19 +47,20 @@ class ReceiveController extends Controller
     public function store(Request $request)
     {
         try{
+            ($request);
             $m= new Receive();
-            $m->memberName = $request->member;
-            $m->paymentName = $request->category;
-            $m->year = $request->year;
-            $m->month = $request->monthName;
-            $m->amount = $request->payAmount;
-            $m->paymentDate = $request->date;
-
+            $m->member_id = $request->member;
+            $m->year_id = $request->year;
+            $m->month_id = $request->month;
+            $m->amount = $request->paid;
+            $m->receipt = $request->receipt_no;
+            $m->paymentDate = now();
             $m->save();
+
             return redirect(route('payment.index'));
             }
             catch (Exception $error) {
-            //dd($error);
+            dd($error);
             return redirect()->back()->withInput();
             }
     }
@@ -101,9 +105,9 @@ class ReceiveController extends Controller
      * @param  \App\Models\Receive  $receive
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Receive $receive)
+    public function destroy($receive)
     {
-        $receive->delete();
+        Receive::find($receive)->delete();
         return redirect()->back();
     }
 

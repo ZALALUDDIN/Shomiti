@@ -11,16 +11,16 @@ class Receive extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function get_member()
+    public function member()
     {
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(Member::class, 'member_id');
     }
-    public function get_month()
+    public function month()
     {
-        return $this->belongsTo(Month::class);
+        return $this->belongsTo(Month::class, 'month_id');
     }
-    public function get_year()
+    public function year()
     {
-        return $this->belongsTo(Year::class);
+        return $this->belongsTo(Year::class, 'year_id');
     }
 }

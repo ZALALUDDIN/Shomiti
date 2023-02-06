@@ -50,7 +50,6 @@
                                               </div>
                                           </th>
                                           <th>#SL.</th>
-                                          <th>Member Id</th>
                                           <th>Name</th>
                                           <th>Phone</th>
                                           <th>Email</th>
@@ -71,7 +70,6 @@
                                               </div>
                                           </td>
                                           <td>{{ ++$loop->index}}</td>
-                                          <td>{{$m->memberId}}</td>
                                           <td>{{$m->name}}</td>
                                           <td>{{$m->phone}}</td>
                                           <td>{{$m->email}}</td>

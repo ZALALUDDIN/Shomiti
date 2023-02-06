@@ -10,7 +10,7 @@ class Year extends Model
 {
     use HasFactory,SoftDeletes;
 
-    public function get_year()
+    public function year()
     {
         return $this->hasMany(Receive::class);
     }

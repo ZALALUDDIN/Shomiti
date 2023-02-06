@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('receives', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('member_id')->nullable();
+            $table->unsignedBigInteger('member_id');
             $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
-            $table->string('paymentName');
-            $table->string('year');
-            $table->string('month');
+            $table->unsignedBigInteger('year_id');
+            $table->foreign('year_id')->references('id')->on('years')->onDelete('cascade');
+            $table->unsignedBigInteger('month_id');
+            $table->foreign('month_id')->references('id')->on('months')->onDelete('cascade');
             $table->string('amount');
-            $table->date('paymentDate')-> Carbon::now();
+            $table->string('receipt');
+            $table->date('paymentDate')->nullable();
             $table->integer('status')->default(1);
-            $table->integer('created_by')->nullable();
-			$table->integer('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

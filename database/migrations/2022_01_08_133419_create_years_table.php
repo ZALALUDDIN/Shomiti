@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('years', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('year');
             $table->integer('status')->default(1);
             $table->integer('created_by')->nullable();

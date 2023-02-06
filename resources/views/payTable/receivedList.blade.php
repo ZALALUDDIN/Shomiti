@@ -50,11 +50,11 @@
                                               </div>
                                           </th>
                                           <th>#SL.</th>
-                                          <th>Member Id</th>
                                           <th>Member Name</th>
+                                          <th>Year</th>
+                                          <th>Month</th>
                                           <th>Amounts</th>
                                           <th>Payment Date</th>
-                                          <th>Status</th>
                                           <th style="width: 75px;">Action</th>
                                       </tr>
                                   </thead>
@@ -67,21 +67,15 @@
                                                   <label class="form-check-label" for="customCheck2">&nbsp;</label>
                                               </div>
                                           </td>
+                                         
                                           <td>{{ ++$loop->index}}</td>
-                                          <td>{{$m->memberId}}</td>
-                                          <td>{{$m->paymentName}}</td>
+                                          <td>{{$m->member->name}}</td>
+                                          <td>{{$m->year->year}}</td>
+                                          <td>{{$m->month->month}}</td>
                                           <td>{{$m->amount}}</td>
                                           <td>{{$m->paymentDate}}</td>
-                                          <td>
-                                              @if ($m->status === 1)
-                                              <span class="badge bg-primary">Active</span>
-                                              @else                                   
-                                                  <span class="badge bg-danger">Blocked</span>
-                                              
-                                              @endif
-                                          </td>
                                           <td class="d-flex">
-                                                <a class="btn btn-sm btn-icon text-primary flex-end" data-bs-toggle="tooltip" title="" href="{{ route('asd.edit', $m->id) }}" data-bs-original-title="Edit User">
+                                                <a class="btn btn-sm btn-icon text-primary flex-end" data-bs-toggle="tooltip" title="" href="{{ route('payment.edit', $m->id) }}" data-bs-original-title="Edit User">
                                                     <span class="btn-inner">
                                                         <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M11.4925 2.78906H7.75349C4.67849 2.78906 2.75049 4.96606 2.75049 8.04806V16.3621C2.75049 19.4441 4.66949 21.6211 7.75349 21.6211H16.5775C19.6625 21.6211 21.5815 19.4441 21.5815 16.3621V12.3341" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -91,7 +85,7 @@
                                                     </span>
                                                 </a>
                                               
-                                              <form id="form{{$m->id}}" action="{{ route('asd.destroy',$m->id) }}" method="POST">
+                                              <form id="form{{$m->id}}" action="{{ route('payment.destroy',$m->id) }}" method="POST">
                                                   @csrf
                                                   @method('delete')
                                                   <button class="btn btn-sm btn-icon text-danger">

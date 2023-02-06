@@ -10,8 +10,8 @@ class Member extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function for_member()
+    public function member()
     {
-        return $this->hasMany(Receive::class);
+        return $this->hasMany(Receive::class, 'member_id');
     }
 }

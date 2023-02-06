@@ -42,7 +42,7 @@ class MemberController extends Controller
     {
         try{
             $m= new Member();
-            $m->memberId = 'M-'.$m->id.RAND(Date("Ymd"),Date("His"));
+            //$m->memberId = 'M-'.$m->id.RAND(Date("Ymd"),Date("His"));
             $m->name = $request->FullName;
             $m->phone = $request->PhoneNumber;
             $m->email = $request->EmailAddress;
@@ -103,7 +103,7 @@ class MemberController extends Controller
             return redirect(route('asd.index'));
             }
             catch (Exception $error) {
-            //dd($error);
+            dd($error);
             return redirect()->back()->withInput();
             }
     }

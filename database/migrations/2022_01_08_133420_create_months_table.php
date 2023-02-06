@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('months', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('month');
             $table->integer('status')->default(1);
             $table->integer('created_by')->nullable();

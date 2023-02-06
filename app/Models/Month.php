@@ -10,7 +10,7 @@ class Month extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function get_month()
+    public function month()
     {
         return $this->hasMany(Receive::class);
     }
