@@ -12,6 +12,6 @@ class Month extends Model
 
     public function month()
     {
-        return $this->hasMany(Receive::class);
+        return $this->hasMany(Receive::class, Report::class);
     }
 }

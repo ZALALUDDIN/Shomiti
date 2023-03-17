@@ -105,10 +105,11 @@ class ReceiveController extends Controller
      * @param  \App\Models\Receive  $receive
      * @return \Illuminate\Http\Response
      */
-    public function destroy($receive)
+    public function destroy($id)
     {
-        Receive::find($receive)->delete();
+        Receive::find($id)->delete();
         return redirect()->back();
+
     }
 
 

@@ -12,6 +12,6 @@ class Year extends Model
 
     public function year()
     {
-        return $this->hasMany(Receive::class);
+        return $this->hasMany(Receive::class, Report::class);
     }
 }

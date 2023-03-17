@@ -14,8 +14,8 @@
       <link rel="stylesheet" href="{{ asset('assets/css/rtl.min.css') }}"/>
 
 
+    
       <!--Script -->
-      
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
       <script src="{{ asset('assets/js/core/libs.min.js') }}"></script>
       <script src="{{ asset('assets/js/core/external.min.js') }}"></script>

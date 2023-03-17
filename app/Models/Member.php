@@ -12,6 +12,6 @@ class Member extends Model
 
     public function member()
     {
-        return $this->hasMany(Receive::class, 'member_id');
+        return $this->hasMany('member_id');
     }
 }
