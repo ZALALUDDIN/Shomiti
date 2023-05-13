@@ -41,40 +41,60 @@
                               {!!Session::get('response')['message']!!}
                               @endif
                               <table class="table table-centered table-striped dt-responsive nowrap w-100" id="products-datatable">
-                                  <thead>
-                                      <tr>
-                                          <th style="width: 20px;">
-                                              <div class="form-check">
-                                                  <input type="checkbox" class="form-check-input" id="customCheck1">
-                                                  <label class="form-check-label" for="customCheck1">&nbsp;</label>
-                                              </div>
-                                          </th>
-                                          <th>#SL.</th>
-                                          <th>Member Name</th>
-                                          <th>Year</th>
-                                          <th>Month</th>
-                                          <th>Amounts</th>
-                                          <th>Payment Date</th>
-                                          <th style="width: 75px;">Action</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      @forelse ($pay as $m)
-                                      <tr>
-                                          <td>
-                                              <div class="form-check">
-                                                  <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                  <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                              </div>
-                                          </td>
-                                         
-                                          <td>{{ ++$loop->index}}</td>
-                                          <td>{{$m->member->name}}</td>
-                                          <td>{{$m->year->year}}</td>
-                                          <td>{{$m->month->month}}</td>
-                                          <td>{{$m->amount}}</td>
-                                          <td>{{$m->paymentDate}}</td>
-                                          <td class="d-flex">
+                                <thead>
+                                    <tr>
+                                        <th>#SL.</th>
+                                        <th>Member Name</th>
+                                        <th>Year</th>
+                                        <th>Month</th>
+                                        <th>Paid</th>
+                                        <th>Due</th>
+                                        <th>Payment Date</th>
+                                        <th style="width: 75px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($pay as $m)
+                                    <tr>
+                                        <td>{{ ++$loop->index}}</td>
+                                        <td>{{$m->member->name}}</td>
+                                        <td>{{$m->year->year}}</td>
+                                        <td>{{$m->month->month}}</td>
+                                        <td>{{$m->amount}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#dueModal{{$m->id}}">{{$m->due}}</button>
+                                            <!-- Add a modal for each row with a unique ID -->
+                                            <div class="modal fade" id="dueModal{{$m->id}}" tabindex="-1" role="dialog" aria-labelledby="dueModalLabel{{$m->id}}" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="dueModalLabel{{$m->id}}">Due Amount for {{$m->month->month}}  {{$m->year->year}}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Due Amount: {{$m->due}}</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            @if(!$m->isPaid())
+                                                            <form action="{{route('payments.update', $m)}}" method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="submit" class="btn btn-primary">Pay</button>
+                                                            </form>
+                                                            @else
+                                                            <p>Paid</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
+                                        <td>{{$m->paymentDate}}</td>
+                                    
+                                         <td class="d-flex">
                                                 <a class="btn btn-sm btn-icon text-primary flex-end" data-bs-toggle="tooltip" title="" href="{{ route('payment.edit', $m->id) }}" data-bs-original-title="Edit User">
                                                     <span class="btn-inner">
                                                         <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,9 +116,11 @@
                                                 </svg></button>
                                               </form>
                                           </td>
-                                      </tr>
-                                  
-                                      @empty
+                                        </tr>
+                                            @empty
+                                        <tr>
+                                            <td colspan="9">No data found.</td>
+                                        </tr>
                                       <tr>
                                           <td colspan="8">
                                               <div class="form-check">
@@ -107,7 +129,7 @@
                                               </div>
                                           </td>
                                       </tr>
-                                      @endforelse
+                                    @endforelse
                                     
                                   </tbody>
                               </table>
@@ -121,6 +143,11 @@
       </div>
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+     //
+</script>
 
 @endsection
 

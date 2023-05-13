@@ -102,8 +102,9 @@
                 var html = "";
                 var total = 0;
                 $.each(data.data, function (index, value) {
+                    var rowNumber = index + 1;
                     html += "<tr>"+
-                                "<td>" + value.id + "</td>"+
+                                "<td>" + rowNumber + "</td>"+
                                 "<td>" + value.paymentDate + "</td>"+
                                 "<td>" + value.name + "</td>"+
                                 "<td>" + value.year + "</td>"+
@@ -140,7 +141,7 @@ function printContent() {
   myWindow.document.write('<style>@media print { table, h2, p { margin: 0 auto; l ine-height: 0.5in; } }</style>');
   myWindow.document.write('</head><body style="align:center"; margin-top: 0.5in;>');
   myWindow.document.write('<h2 style="text-align:center">সমিতি মেনেজমেন্ট সিস্টেম</h2><br>'+
-                          '<p style="text-align:center">This is the report as you want</p><hr>')
+                          '<p style="text-align:center">This is the report as you want</p><hr>');
   myWindow.document.write(content);
   myWindow.document.write('</body></html>');
   myWindow.document.close();

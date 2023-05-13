@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use app\Models\Member;
 
 class Receive extends Model
 {
@@ -13,14 +12,26 @@ class Receive extends Model
 
     public function member()
     {
-        return $this->belongsTo(Member::class, 'member_id');
+        return $this->belongsTo(Member::class);
     }
+
     public function month()
     {
-        return $this->belongsTo(Month::class, 'month_id');
+        return $this->belongsTo(Month::class);
     }
+
     public function year()
     {
-        return $this->belongsTo(Year::class, 'year_id');
+        return $this->belongsTo(Year::class);
+    }
+
+
+
+    public function isPaid()
+    {
+        return $this->amount > 0;
     }
 }
+
+
+

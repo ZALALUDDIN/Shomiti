@@ -28,7 +28,7 @@ class ReportController extends Controller
                 $query->whereBetween('receives.paymentDate', [$startDate, $endDate]);
             }
     
-            $data = $query->paginate(10);
+            $data = $query->paginate();
     
             return response()->json($data);
         }

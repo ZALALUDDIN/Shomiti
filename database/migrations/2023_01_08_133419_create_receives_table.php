@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('month_id');
             $table->foreign('month_id')->references('id')->on('months')->onDelete('cascade');
             $table->string('amount');
+            $table->string('due')->nullable();
             $table->string('receipt');
             $table->date('paymentDate')->nullable();
             $table->integer('status')->default(1);

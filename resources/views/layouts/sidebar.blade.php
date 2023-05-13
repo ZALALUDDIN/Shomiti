@@ -114,6 +114,7 @@
                                 <span class="item-name">Payment Recieve</span>
                             </a>
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link " href="{{ route('payment.index') }}">
                                 <i class="icon">

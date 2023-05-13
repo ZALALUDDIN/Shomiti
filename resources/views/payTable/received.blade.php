@@ -24,7 +24,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-lg-4">
-                                    <a href="{{route('asd.index')}}" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> List of Reveived</a>
+                                    <a href="{{route('payment.index')}}" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> List of Reveived</a>
                                 </div>
                                 <h4 class="header-title">Make Payment</h4>
                                 @if ($errors->any())
@@ -63,18 +63,10 @@
                                         <div class="col-lg-6">
                                             <div class="form-floating mb-3">
                                                 <div class="form-group">
-                                                    <label for="receipt_no">Receipt No</label>
-                                                        <input type="number" class="form-control" name="receipt_no" id="receipt_no">
+                                                    <label for="receipt_no">Receipt NUmber</label>
+                                                        <input type="number" class="form-control" name="receipt_no" id="receipt_no" required>
                                                 </div>
                                             </div>
-                                            {{-- <div class="form-floating mb-3">
-                                                <div class="form-group">
-                                                    <label for="fees_month">Fees Month</label> <br>
-                                                    <select class="form-control" name="month" id="month">
-                                                        <option value=""></option>
-                                                    </select>
-                                                </div>
-                                            </div> --}}
                                         </div>
                                         <div class="panel-body">
 
@@ -106,15 +98,16 @@
                                                         <select class="form-control" name="month" onchange="get_total()";>
                                                             <option value=""></option>
                                                         </select>
+
                                                        </td>
                                                        <td>
-                                                           <input type="text" name="price[]" required readonly  class="form-control price" value="0.00">
+                                                           <input type="text" name="price[]" required readonly  class="form-control price" value="0">
                                                        </td>
 
                                                        <td>
                                                          <div class="btn btn-group">
-                                                           <button type="button" class="btn btn-sm btn-primary addBtn">Add</button>
-                                                           <button type="button" class="btn btn-sm btn-danger removeBtn">Remove</button>
+                                                           <button type="button" class="btn btn-sm btn-primary addBtn" disabled>Add</button>
+                                                           <button type="button" class="btn btn-sm btn-danger removeBtn" disabled>Remove</button>
                                                           </div>
                                                        </td>
                                                    </tr>
@@ -123,19 +116,19 @@
                                                    <tr class="bg-info">
                                                        <td colspan="3"></td>
                                                        <th class="text-right">Total</th>
-                                                       <th><input type="text" name="total" id="total" class="form-control" readonly required value="0.00"></th>
+                                                       <th><input type="text" name="total" id="total" class="form-control" readonly required value="0"></th>
                                                        <td></td>
                                                    </tr>
                                                    <tr>
                                                        <td colspan="3"></td>
                                                        <th class="text-right text-success">Pay</th>
-                                                       <td><input type="text" name="paid" id="paid" class="paidDue form-control" required placeholder="Paid"  value="0.00" onKeyup="get_due()"></td>
+                                                       <td><input type="text" name="paid" id="paid" class="paidDue form-control" required placeholder="Paid"  value="0" onKeyup="get_due()"></td>
                                                        <td></td>
                                                    </tr>
                                                    <tr class="bg-danger">
                                                        <td colspan="3"></td>
                                                        <th class="text-right">Due</th>
-                                                       <td><input type="text" name="due" id="due" class="paidDue form-control" required readonly placeholder="Due" value="0.00"></td>
+                                                       <td><input type="text" name="dueAmount" id="due" class="paidDue form-control" required readonly placeholder="Due" value="Paid"></td>
                                                        <td></td>
                                                    </tr>
 
@@ -195,43 +188,89 @@
         });
 	});
 
-  const get_total = () => {
-    var total = 0;
-			    $('.price').each(function(){
-				total += parseFloat($(this).val());
-				$('#total').val(total.toFixed(2));
-			});
-  }
 
-    function get_month(v){
-	$(v).parent('td').siblings('td').find('select').html('');
-	$.ajax({
-		url:'{{ route("payment.get_month")}}',
-		type: 'GET',
-		data: {'id': $(v).val()},
+    const get_total = () => {
+        var total = 0;
+        $('.price').each(function(){
+            total += parseFloat($(this).val());
+            $('#total').val(total);
+        });
+    }
 
-		success: function(data){
-			if(data){
-				$(v).parent('td').siblings('td').find('select').append("<option value=''> -- Select Month -- </option>");
-				for(var i in data)
-				$(v).parent('td').siblings('td').find('select').append("<option value='"+data[i].id+"'>"+data[i].month+"</option>");
-                
-			}
-		}
-	});
+function get_month(v){
+    $(v).parent('td').siblings('td').find('select').html('');
+    $.ajax({
+        url:'{{ route("payment.get_month")}}',
+        type: 'GET',
+        data: {'id': $(v).val()},
+
+        success: function(data){
+            if(data){
+                $(v).parent('td').siblings('td').find('select').append("<option value=''> -- Select Month -- </option>");
+                for(var i in data) {
+                    var monthPaid = data[i].paid;
+                    var month = data[i].month;
+                    var option = "<option value='"+data[i].id+"'>"+month+"</option>";
+                    if (monthPaid) {
+                        option = "<option value='"+data[i].id+"' disabled>"+month+" (Already Paid)</option>";
+                    }
+                    $(v).parent('td').siblings('td').find('select').append(option);
+                }
+            }
+        }
+    });
 }
+
+
+
+function payment(v) {
+    var year = $(v).val();
+    var member_id = $('#member_id').val();
+    $.ajax({
+        url: "{{ route('check-payment') }}",
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            year: year,
+            member_id: member_id
+        },
+        success: function(response) {
+            if(response.message === 'paid') {
+                $(v).parent('td').siblings('td').find('select').html('');
+                alert('This month is already paid.');
+            } else {
+                $(v).parent('td').siblings('td').find('select').html('');
+                if(response){
+                    $(v).parent('td').siblings('td').find('select').append("<option value=''> -- Select Month -- </option>");
+                    for(var i in response) {
+                        var monthPaid = response[i].paid;
+                        var month = response[i].month;
+                        var option = "<option value='"+response[i].id+"'>"+month+"</option>";
+                        if (monthPaid) {
+                            option = "<option value='"+response[i].id+"' disabled>"+month+" (Already Paid)</option>";
+                        }
+                        $(v).parent('td').siblings('td').find('select').append(option);
+                    }
+                }
+            }
+        }
+    });
+}
+
+
+
+
 
 
 	function get_due(){
 		var total =$('#total').val();
 		var paid =$('#paid').val();
-		var due = ((parseFloat(total)-parseFloat(paid))).toFixed(2);
+		var due = ((parseFloat(total)-parseFloat(paid)));
 		if (due < 1)
 			due = 0;
-		$('#due').val(due).toFixed(2);
+		$('#due').val(due);
 	}
-
-            </script>
+</script>
 
 
 

@@ -44,6 +44,16 @@ class ReceiveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+//     public function create()
+//     {
+//         $payer=Member::all();
+//         $year=Year::all();
+//         //$month=Month::all();
+//         return view('payTable.receivednew', compact('payer', 'year'));
+//     }
+
+
+
     public function store(Request $request)
     {
         try{
@@ -52,17 +62,30 @@ class ReceiveController extends Controller
             $m->member_id = $request->member;
             $m->year_id = $request->year;
             $m->month_id = $request->month;
-            $m->amount = $request->paid;
+            $m->amount = $request->paid + $request->dueAmount;
+            $m->due = $request->dueAmount;
             $m->receipt = $request->receipt_no;
             $m->paymentDate = now();
             $m->save();
 
+
+ $receive = Receive::find(1);
+            if ($receive->isPaid()) {
+                // Payment has been made
+            } else {
+                // Payment has not been made
+            }
+
+
+            
             return redirect(route('payment.index'));
             }
             catch (Exception $error) {
             dd($error);
             return redirect()->back()->withInput();
             }
+
+           
     }
 
     /**
@@ -95,9 +118,19 @@ class ReceiveController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Receive $receive)
-    {
-        //
-    }
+{
+    // Validate the request data
+    $request->validate([
+        'dueAmount' => 'required',
+    ]);
+
+    // Update the payment with the new data
+    $receive->due = $request->input('dueAmount');
+    $receive->save();
+
+    // Redirect back to the original page with a success message
+    return redirect()->back()->with('success', 'Due payment updated successfully.');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -125,3 +158,4 @@ class ReceiveController extends Controller
 		return $get_payable;
 	}
 }
+

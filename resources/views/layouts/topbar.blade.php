@@ -39,18 +39,18 @@
           <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
              <li class="nav-item dropdown">
                 <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="../assets/images/Flag/flag001.png" class="img-fluid rounded-circle" alt="user" style="height: 30px; min-width: 30px; width: 30px;">
+                <img src="{{ asset('assets/images/Flag/flag001.png') }}" class="img-fluid rounded-circle" alt="user" style="height: 30px; min-width: 30px; width: 30px;">
                 <span class="bg-primary"></span>
                 </a>
                 <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
                     <div class="m-0 border-0 shadow-none card">
                         <div class="p-0 ">
                             <ul class="p-0 list-group list-group-flush">
-                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="../assets/images/Flag/flag-03.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Spanish</a></li>
-                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="../assets/images/Flag/flag-04.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Italian</a></li>
-                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="../assets/images/Flag/flag-02.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>French</a></li>
-                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="../assets/images/Flag/flag-05.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>German</a></li>
-                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="../assets/images/Flag/flag-06.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Japanese</a></li>
+                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/images/Flag/flag-03.png') }}" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Spanish</a></li>
+                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/images/Flag/flag-04.png') }}" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Italian</a></li>
+                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/images/Flag/flag-02.png') }}" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>French</a></li>
+                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/images/Flag/flag-05.png') }}" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>German</a></li>
+                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/images/Flag/flag-06.png') }}" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Japanese</a></li>
                             </ul>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                     <div class="p-0 card-body">
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
-                              <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/01.png" alt="">
+                              <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/images/shapes/01.png') }}" alt="">
                               <div class="ms-3 w-100">
                                 <h6 class="mb-0 ">Emma Watson Bni</h6>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -87,7 +87,7 @@
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
                               <div class="">
-                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/02.png" alt="">
+                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/images/shapes/02.png') }}" alt="">
                               </div>
                               <div class="ms-3 w-100">
                                 <h6 class="mb-0 ">New customer is join</h6>
@@ -100,7 +100,7 @@
                         </a>
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
-                              <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/03.png" alt="">
+                              <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/images/shapes/03.png') }}" alt="">
                               <div class="ms-3 w-100">
                                 <h6 class="mb-0 ">Two customer is left</h6>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -112,7 +112,7 @@
                         </a>
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
-                              <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/04.png" alt="">
+                              <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/images/shapes/04.png') }}" alt="">
                               <div class="w-100 ms-3">
                                 <h6 class="mb-0 ">New Mail from Fenny</h6>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -145,7 +145,7 @@
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
                               <div class="">
-                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/01.png" alt="">
+                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/images/shapes/01.png') }}" alt="">
                               </div>
                               <div class="ms-3">
                                 <h6 class="mb-0 ">Bni Emma Watson</h6>
@@ -156,7 +156,7 @@
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
                               <div class="">
-                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/02.png" alt="">
+                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/images/shapes/02.png') }}" alt="">
                               </div>
                               <div class="ms-3">
                                 <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
@@ -167,7 +167,7 @@
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
                               <div class="">
-                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/03.png" alt="">
+                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/images/shapes/03.png') }}" alt="">
                               </div>
                               <div class="ms-3">
                                 <h6 class="mb-0 ">Why do we use it?</h6>
@@ -178,7 +178,7 @@
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
                               <div class="">
-                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/04.png" alt="">
+                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/images/shapes/04.png') }}" alt="">
                               </div>
                               <div class="ms-3">
                                 <h6 class="mb-0 ">Variations Passages</h6>
@@ -189,7 +189,7 @@
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
                               <div class="">
-                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/05.png" alt="">
+                                <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/images/shapes/05.png') }}" alt="">
                               </div>
                               <div class="ms-3">
                                 <h6 class="mb-0 ">Lorem Ipsum generators</h6>
@@ -203,22 +203,22 @@
             </li>
             <li class="nav-item dropdown">
               <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="../assets/images/avatars/01.png" alt="User-Profile" class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
-                <img src="../assets/images/avatars/avtar_1.png" alt="User-Profile" class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded">
-                <img src="../assets/images/avatars/avtar_2.png" alt="User-Profile" class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded">
-                <img src="../assets/images/avatars/avtar_4.png" alt="User-Profile" class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded">
-                <img src="../assets/images/avatars/avtar_5.png" alt="User-Profile" class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded">
-                <img src="../assets/images/avatars/avtar_3.png" alt="User-Profile" class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
+                <img src="{{ asset('assets/images/avatars/01.png') }}" alt="User-Profile" class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
+                <img src="{{ asset('assets/images/avatars/avtar_1.png') }}" alt="User-Profile" class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded">
+                <img src="{{ asset('assets/images/avatars/avtar_2.png') }}" alt="User-Profile" class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded">
+                <img src="{{ asset('assets/images/avatars/avtar_4.png') }}" alt="User-Profile" class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded">
+                <img src="{{ asset('assets/images/avatars/avtar_5.png') }}" alt="User-Profile" class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded">
+                <img src="{{ asset('assets/images/avatars/avtar_3.png') }}" alt="User-Profile" class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
                 <div class="caption ms-3 d-none d-md-block ">
                     <h6 class="mb-0 caption-title">MASUM</h6>
                     <p class="mb-0 caption-sub-title">Admin</p>
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="../dashboard/app/user-profile.html">Profile</a></li>
-                <li><a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">Privacy Setting</a></li>
+                <li><a class="dropdown-item" href="{{ asset('dashboard/app/user-profile.html') }}">Profile</a></li>
+                <li><a class="dropdown-item" href="{{ asset('dashboard/app/user-privacy-setting.html') }}">Privacy Setting</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="../dashboard/auth/sign-in.html">Logout</a></li>
+                <li><a class="dropdown-item" href="{{ asset('dashboard/auth/sign-in.html') }}">Logout</a></li>
               </ul>
             </li>
           </ul>

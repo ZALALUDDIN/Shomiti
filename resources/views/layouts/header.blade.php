@@ -12,11 +12,11 @@
       <link rel="stylesheet" href="{{ asset('assets/css/dark.min.css') }}"/>
       <link rel="stylesheet" href="{{ asset('assets/css/customizer.min.css') }}" />
       <link rel="stylesheet" href="{{ asset('assets/css/rtl.min.css') }}"/>
-
-
-    
-      <!--Script -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+ 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
       <script src="{{ asset('assets/js/core/libs.min.js') }}"></script>
       <script src="{{ asset('assets/js/core/external.min.js') }}"></script>
       <script src="{{ asset('assets/js/charts/widgetcharts.js') }}"></script>

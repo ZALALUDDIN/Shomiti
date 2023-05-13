@@ -43,12 +43,6 @@
                               <table class="table table-centered table-striped dt-responsive nowrap w-100" id="products-datatable">
                                   <thead>
                                       <tr>
-                                          <th style="width: 20px;">
-                                              <div class="form-check">
-                                                  <input type="checkbox" class="form-check-input" id="customCheck1">
-                                                  <label class="form-check-label" for="customCheck1">&nbsp;</label>
-                                              </div>
-                                          </th>
                                           <th>#SL.</th>
                                           <th>Name</th>
                                           <th>Phone</th>
@@ -63,12 +57,6 @@
                                   <tbody>
                                       @forelse ($member as $m)
                                       <tr>
-                                          <td>
-                                              <div class="form-check">
-                                                  <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                  <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                              </div>
-                                          </td>
                                           <td>{{ ++$loop->index}}</td>
                                           <td>{{$m->name}}</td>
                                           <td>{{$m->phone}}</td>
